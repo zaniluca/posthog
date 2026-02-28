@@ -462,7 +462,8 @@
          "posthog_featureflag"."last_called_at"
   FROM "posthog_featureflag"
   INNER JOIN "posthog_team" ON ("posthog_featureflag"."team_id" = "posthog_team"."id")
-  WHERE ("posthog_featureflag"."key" = 'some-feature2'
+  WHERE (NOT ("posthog_featureflag"."deleted")
+         AND "posthog_featureflag"."key" = 'some-feature2'
          AND "posthog_team"."project_id" = 99999)
   LIMIT 21
   '''
@@ -641,7 +642,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -781,7 +781,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -879,7 +878,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -1120,7 +1118,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -1204,7 +1201,8 @@
          "posthog_featureflag"."last_called_at"
   FROM "posthog_featureflag"
   INNER JOIN "posthog_team" ON ("posthog_featureflag"."team_id" = "posthog_team"."id")
-  WHERE ("posthog_featureflag"."key" = 'some-feature-new'
+  WHERE (NOT ("posthog_featureflag"."deleted")
+         AND "posthog_featureflag"."key" = 'some-feature-new'
          AND "posthog_team"."project_id" = 99999)
   LIMIT 21
   '''
@@ -1501,7 +1499,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -1869,7 +1866,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -1939,7 +1935,8 @@
          "posthog_featureflag"."last_called_at"
   FROM "posthog_featureflag"
   INNER JOIN "posthog_team" ON ("posthog_featureflag"."team_id" = "posthog_team"."id")
-  WHERE ("posthog_featureflag"."key" = 'some-feature2'
+  WHERE (NOT ("posthog_featureflag"."deleted")
+         AND "posthog_featureflag"."key" = 'some-feature2'
          AND "posthog_team"."project_id" = 99999)
   LIMIT 21
   '''
@@ -2014,7 +2011,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -2360,7 +2356,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -2457,7 +2452,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -2673,7 +2667,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -2812,7 +2805,8 @@
          "posthog_featureflag"."last_called_at"
   FROM "posthog_featureflag"
   INNER JOIN "posthog_team" ON ("posthog_featureflag"."team_id" = "posthog_team"."id")
-  WHERE ("posthog_featureflag"."key" = 'some-feature-new'
+  WHERE (NOT ("posthog_featureflag"."deleted")
+         AND "posthog_featureflag"."key" = 'some-feature-new'
          AND "posthog_team"."project_id" = 99999)
   LIMIT 21
   '''
@@ -2984,7 +2978,8 @@
          "posthog_featureflag"."last_called_at"
   FROM "posthog_featureflag"
   INNER JOIN "posthog_team" ON ("posthog_featureflag"."team_id" = "posthog_team"."id")
-  WHERE ("posthog_featureflag"."key" = 'some-feature2'
+  WHERE (NOT ("posthog_featureflag"."deleted")
+         AND "posthog_featureflag"."key" = 'some-feature2'
          AND "posthog_team"."project_id" = 99999)
   LIMIT 21
   '''
@@ -3052,7 +3047,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -3393,7 +3387,6 @@
          "posthog_featureflag"."key",
          "posthog_featureflag"."name",
          "posthog_featureflag"."filters",
-
          "posthog_featureflag"."team_id",
          "posthog_featureflag"."created_by_id",
          "posthog_featureflag"."created_at",
@@ -3742,7 +3735,8 @@
          "posthog_featureflag"."last_called_at"
   FROM "posthog_featureflag"
   INNER JOIN "posthog_team" ON ("posthog_featureflag"."team_id" = "posthog_team"."id")
-  WHERE ("posthog_featureflag"."key" = 'some-feature'
+  WHERE (NOT ("posthog_featureflag"."deleted")
+         AND "posthog_featureflag"."key" = 'some-feature'
          AND "posthog_team"."project_id" = 99999)
   LIMIT 21
   '''
@@ -4506,7 +4500,8 @@
   INNER JOIN "posthog_team" ON ("posthog_featureflag"."team_id" = "posthog_team"."id")
   LEFT OUTER JOIN "posthog_user" ON ("posthog_featureflag"."created_by_id" = "posthog_user"."id")
   LEFT OUTER JOIN "posthog_user" T5 ON ("posthog_featureflag"."last_modified_by_id" = T5."id")
-  WHERE ("posthog_team"."project_id" = 99999
+  WHERE (NOT ("posthog_featureflag"."deleted")
+         AND "posthog_team"."project_id" = 99999
          AND "posthog_featureflag"."id" = 99999)
   LIMIT 21
   '''
