@@ -3050,7 +3050,7 @@
   SELECT 1 AS "a"
   FROM "posthog_team"
   WHERE ("posthog_team"."project_id" = 99999
-         AND "posthog_team"."session_recording_linked_flag" @> '{"id": 6349}'::jsonb)
+         AND "posthog_team"."session_recording_linked_flag" @> '{"id": 65}'::jsonb)
   LIMIT 1
   '''
 # ---
