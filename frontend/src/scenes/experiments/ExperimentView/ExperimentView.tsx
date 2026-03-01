@@ -36,7 +36,7 @@ import { SummarizeExperimentButton } from '../components/SummarizeExperimentButt
 import { SummarizeSessionReplaysButton } from '../components/SummarizeSessionReplaysButton'
 import { experimentLogic } from '../experimentLogic'
 import type { ExperimentSceneLogicProps } from '../experimentSceneLogic'
-import { experimentSceneLogic } from '../experimentSceneLogic'
+import { type ExperimentTab, experimentSceneLogic } from '../experimentSceneLogic'
 import { getExperimentStatus } from '../experimentsLogic'
 import { isLegacyExperiment, isLegacyExperimentQuery } from '../utils'
 import { DistributionModal, DistributionTable } from './DistributionTable'
@@ -252,6 +252,51 @@ export function ExperimentView({ tabId }: Pick<ExperimentSceneLogicProps, 'tabId
         return <ExperimentForm draftExperiment={experiment} tabId={tabId} />
     }
 
+    const experimentTabs: { key: ExperimentTab; label: string | JSX.Element; content: JSX.Element }[] = [
+        {
+            key: 'metrics',
+            label: 'Metrics',
+            content: <MetricsTab />,
+        },
+        ...(!isExperimentDraft
+            ? [
+                  {
+                      key: 'code' as const,
+                      label: 'Code',
+                      content: <CodeTab />,
+                  },
+              ]
+            : []),
+        {
+            key: 'variants',
+            label: 'Variants',
+            content: <VariantsTab />,
+        },
+        {
+            key: 'history',
+            label: 'History',
+            content: <ActivityLog scope={ActivityScope.EXPERIMENT} id={experimentId} />,
+        },
+        ...(experiment.feature_flag
+            ? [
+                  {
+                      key: 'feedback' as const,
+                      label: (
+                          <div className="flex flex-row">
+                              <div>User feedback</div>
+                              <LemonTag className="ml-2 float-right uppercase" type="primary">
+                                  New
+                              </LemonTag>
+                          </div>
+                      ),
+                      content: <ExperimentFeedbackTab experiment={experiment} />,
+                  },
+              ]
+            : []),
+    ]
+    const availableTabKeys = experimentTabs.map((t) => t.key)
+    const effectiveTabKey = availableTabKeys.includes(activeTabKey) ? activeTabKey : 'metrics'
+
     return (
         <SceneContent>
             <PageHeaderCustom />
@@ -262,51 +307,10 @@ export function ExperimentView({ tabId }: Pick<ExperimentSceneLogicProps, 'tabId
                     {usesNewQueryRunner ? <Info tabId={tabId} /> : <LegacyExperimentInfo />}
                     {usesNewQueryRunner ? <ExperimentHeader /> : <LegacyExperimentHeader />}
                     <LemonTabs
-                        activeKey={activeTabKey}
+                        activeKey={effectiveTabKey}
                         onChange={(key) => setActiveTabKey(key)}
                         sceneInset
-                        tabs={[
-                            {
-                                key: 'metrics',
-                                label: 'Metrics',
-                                content: <MetricsTab />,
-                            },
-                            ...(!isExperimentDraft
-                                ? [
-                                      {
-                                          key: 'code',
-                                          label: 'Code',
-                                          content: <CodeTab />,
-                                      },
-                                  ]
-                                : []),
-                            {
-                                key: 'variants',
-                                label: 'Variants',
-                                content: <VariantsTab />,
-                            },
-                            {
-                                key: 'history',
-                                label: 'History',
-                                content: <ActivityLog scope={ActivityScope.EXPERIMENT} id={experimentId} />,
-                            },
-                            ...(experiment.feature_flag
-                                ? [
-                                      {
-                                          key: 'feedback',
-                                          label: (
-                                              <div className="flex flex-row">
-                                                  <div>User feedback</div>
-                                                  <LemonTag className="ml-2 float-right uppercase" type="primary">
-                                                      New
-                                                  </LemonTag>
-                                              </div>
-                                          ),
-                                          content: <ExperimentFeedbackTab experiment={experiment} />,
-                                      },
-                                  ]
-                                : []),
-                        ]}
+                        tabs={experimentTabs}
                     />
 
                     {usesNewQueryRunner ? (
